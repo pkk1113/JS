@@ -11,8 +11,19 @@
 </head>
 
 <body>
+    <div class="scroll-me" id="js-scroll-me">
+        <p class="scroll-me__speech-bubble">scroll down</p>
+        <svg class="scroll-me__icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"></path>
+        </svg>
+        <svg class="scroll-me__guage" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <circle class="scroll-me__guage__circle" stroke-width="1" fill="none" stroke="currentColor" stroke-width="1" r="9.5" cx="10" cy="10" data-dasharray="62" style="--dasharray: 62;"/>
+        </svg>
+    </div>
     <div class="parallax parallax--1"></div>
-    <p>
+    <p class="poem">
         눈은 가볍다<br>
         서로가 서로를 업고 있기 때문에<br>
         내리는 눈은 포근하다<br>
@@ -22,7 +33,7 @@
         나도 누군가를 업고 싶다
     </p>
     <div class="parallax parallax--2"></div>
-    <p>
+    <p class="poem">
         눈 덮인 고향마을이다<br>
         웅숭깊은 어머니의 큰 가슴이다<br>
         긍정도 부정도 아닌 침묵은 경전의 바다다<br>
@@ -30,6 +41,44 @@
         산 자들이 겸허히 고개 숙이는 거대한 자연이다.
     </p>
     <div class="parallax parallax--1"></div>
+
+    <script>
+        const scrollMe = document.getElementById("js-scroll-me");
+        const scrollMeSpeechBubble = document.querySelector(".scroll-me__speech-bubble");
+        const scrollGuageCircle = document.querySelector(".scroll-me__guage__circle");
+
+        window.addEventListener('scroll', () => {
+            // class 추가
+            scrollMe.classList.toggle('scrolled', window.scrollY > 0);
+
+            // class 추가에 대한 text 변경
+            if (scrollMe.classList.contains('scrolled')) {
+                scrollMeSpeechBubble.textContent = "scroll to top";
+            } else {
+                scrollMeSpeechBubble.textContent = "scroll down";
+            }
+
+            // guage 채우기
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const ratio = (winScroll / height);
+            scrollGuageCircle.style.strokeDashoffset = scrollGuageCircle.dataset.dasharray * (1 - ratio);
+            console.log(scrollGuageCircle.style.strokeDashoffset);
+        });
+        scrollMe.addEventListener('click', () => {
+            if (scrollMe.classList.contains('scrolled')) {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                window.scrollTo({
+                    top: window.screen.height,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

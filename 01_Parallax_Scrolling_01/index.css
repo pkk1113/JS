@@ -3,14 +3,131 @@
 
 * {
     font-family: 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
 }
 
 body {
-    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
 }
 
-p {
+.scroll-me {
+    --width: 5vmin;
+    --bubble-color: turquoise;
+    position: absolute;
+    top: calc(100vh - 2 * var(--width));
+    right: calc(50% - calc(var(--width) / 2));
+    width: var(--width);
+    min-width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transition: 1s;
+    animation: scrollMe 1s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.scroll-me.scrolled {
+    position: fixed;
+    right: 6vmin;
+}
+
+.scroll-me__speech-bubble {
+    position: absolute;
+    top: -7vmin;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+
+    opacity: 0;
+    transform: scaleX(0);
+
+    padding: 1vmin 2vmin;
+    border-radius: 5vmin;
+    background: var(--bubble-color);
+    font-size: 2vmin;
     text-align: center;
+    white-space: nowrap;
+
+    transition: 0.5s;
+    animation: bubblePop 2s infinite;
+}
+
+.scroll-me:hover .scroll-me__speech-bubble {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+.scroll-me__speech-bubble::after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: -1.5vmin;
+    width: 0;
+    height: 0;
+    border-top: 2vmin solid var(--bubble-color);
+    border-left: 2vmin solid transparent;
+    border-right: 2vmin solid transparent;
+}
+
+.scroll-me__icon {
+    position: absolute;
+    color: rgb(233, 233, 233);
+    background: rgb(46, 46, 46);
+    border-radius: 50%;
+    padding: 10%;
+    box-shadow:
+        0 0 1vmin var(--bubble-color),
+        0 0 2vmin var(--bubble-color),
+        0 0 3vmin var(--bubble-color);
+    transform: rotateZ(0deg);
+    transition: transform 1s cubic-bezier(0.600, -0.280, 0.735, 0.045);
+}
+
+.scroll-me.scrolled .scroll-me__icon{
+    transform: rotateZ(180deg);
+}
+
+.scroll-me__guage {
+    position: absolute;
+    color: white;
+    transform: rotateZ(-90deg);
+}
+
+.scroll-me__guage__circle {
+    stroke-dasharray: var(--dasharray);
+    stroke-dashoffset: 0;
+    transition: 0.5s;
+}
+
+@keyframes scrollMe {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    50% {
+        transform: translateY(-1vmin);
+    }
+}
+
+.poem {
+    --alpha: 0.4;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    line-height: 50px;
+    background: linear-gradient(rgba(255, 255, 255, var(--alpha)), rgba(255, 255, 255, var(--alpha))), url(./bg-1.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
 }
 
 .parallax {
@@ -21,10 +138,18 @@ p {
     background-position: bottom center;
     background-repeat: no-repeat;
 }
+
 .parallax--1 {
-    background-image: url("./bg-1.jpg");
+    background-image: url("./bg-3.jpg");
 }
+
 .parallax--2 {
     height: 50vh;
-    background-image: url("./bg-3.jpg");
+    background-image: url("./bg-2.jpg");
+}
+
+@media screen and (max-width: 768px) {
+    .scroll-me__speech-bubble {
+        display: none;
+    }
 }
