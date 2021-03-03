@@ -27,21 +27,21 @@ section:nth-child(1) {
     background: rgba(255, 0, 0, 0.5);
 }
 section:nth-child(2) {
-    background: rgba(0, 255, 0) url(./bg-1.jpg);
+    background: rgba(0, 255, 0) url(../asset/bg-1.jpg);
     background-blend-mode: multiply;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
 }
 section:nth-child(3) {
-    background: rgba(0, 0, 255) url(./bg-2.jpg);
+    background: rgba(0, 0, 255) url(../asset/bg-2.jpg);
     background-blend-mode: multiply;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
 }
 section:nth-child(4) {
-    background: rgba(255, 255, 0) url(./bg-3.jpg);
+    background: rgba(255, 255, 0) url(../asset/bg-3.jpg);
     background-blend-mode: multiply;
     background-attachment: fixed;
     background-position: center;
