@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Dokdo&display=swap');
+@import url(../reset.css);
+
+:root {
+    --max-width: 1020px;
+    --min-padding: 20px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    color: white;
+    background: rgb(0, 0, 0);
+    font-family: 'Dokdo', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s ease-in-out;
+}
+
+header.scrolled {
+    background-color: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 0 10px 5px black;
+}
+
+nav {
+    width: calc(100% - 2 * var(--min-padding));
+    max-width: var(--max-width);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+}
+
+nav ul li {
+    margin-left: 50px;
+}
+
+nav ul li a {
+    padding: 8px 8px;
+    transition: 0.2s ease-in-out;
+}
+nav ul li a.bigger {
+    font-size: 2rem;
+}
+
+main {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* js로 parallax를 구현할 경우, 아래의 기능을 쓸 수 없다.
+    overflow: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory; */
+}
+
+section {
+    width: 100%;
+    height: 100vh;
+    padding: var(--min-padding) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* js로 parallax를 구현할 경우, 아래의 기능을 쓸 수 없다.
+    scroll-snap-align: center; */
+}
+
+section:nth-child(even) {
+    background: rgb(95, 0, 0) url(../asset/deathnote.png);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+}
+
+section:nth-child(odd) {
+    background: rgb(70, 70, 70) url(../asset/deathnote-book.png);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+}
+
+section p {
+    width: calc(100% - 2 * var(--min-padding));
+    max-width: var(--max-width);
+    font-size: 1.6rem;
+}
+
+section p:first-letter {
+    font-size: 3em;
+    line-height: normal;
+    float: left;
+}
+
+.apple {
+    position: fixed;
+    z-index: -1;
+    top: 0px;
+    height: 10vh;
+    width: 10vh;
+    transition: 0.1s linear;
+    transform: rotateZ(0deg);
+    opacity: 0;
+}
+
+.apple::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: url(../asset/apple.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.ryuk {
+    position: fixed;
+    z-index: -1;
+    top: 20vh;
+    width: 100vw;
+    height: 60vh;
+    transition: 0.1s linear;
+    opacity: 0;
+}
+
+.ryuk::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: url(../asset/ryuk.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.apple.scrolled,
+.ryuk.scrolled {
+    z-index: 1;
+}
