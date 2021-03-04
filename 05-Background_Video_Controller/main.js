@@ -21,6 +21,11 @@ function initVideoController(parentDiv) {
         videoProgressBar.style.width = `${ratio}%`;
     });
 
+    video.addEventListener('ended', ()=>{
+        videoPlayBtn.classList.toggle('invisible');
+        videoPauseBtn.classList.toggle('invisible');
+    });
+
     videoPlayBtn.addEventListener('click', () => {
         video.play();
         videoPlayBtn.classList.toggle('invisible');
