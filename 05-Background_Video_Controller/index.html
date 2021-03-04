@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
+</head>
+
+<!-- 
+    구글 정책에 따라 muted 없이 autoplay가 되지 않는다. 
+    소리/영상 중 하나를 결정하여 사용자에게 묻기 버튼이 필요할 듯 하다. 
+    [소리 듣기] 버튼 : 영상이 자동으로 실행되는 중, 소리를 묻는 느낌.
+    [영상 보기] 버튼 : 영상/소리를 포함하여 실행을 묻는 느낌
+-->
+
+<body>
+    <main>
+        <!-- Loop -->
+        <section>
+            <video loop>
+                <source src="../asset/chime-bell.mp4 " type="video/mp4">
+            </video>
+            <div class="options">
+                <div class="option">Loop</div>
+            </div>
+            <div class="video-controller">
+                <i class="fas fa-play-circle"></i>
+                <i class="fas fa-pause-circle"></i>
+                <i class="fas fa-redo-alt fa-sm"></i>
+                <div class="video-controller__progress">
+                    <div class="video-controller__progress-bar"></div>
+                </div>
+                <i class="fas fa-volume-up"></i>
+                <i class="fas fa-volume-mute"></i>
+            </div>
+        </section>
+
+        <!-- Autoplay + Muted -->
+        <section>
+            <video autoplay muted>
+                <source src="../asset/chime-bell.mp4" type="video/mp4">
+            </video>
+            <div class="options">
+                <div class="option">Autoplay</div>
+                <div class="option">Muted</div>
+            </div>
+            <div class="video-controller">
+                <i class="fas fa-play-circle"></i>
+                <i class="fas fa-pause-circle"></i>
+                <i class="fas fa-redo-alt fa-sm"></i>
+                <div class="video-controller__progress">
+                    <div class="video-controller__progress-bar"></div>
+                </div>
+                <i class="fas fa-volume-up"></i>
+                <i class="fas fa-volume-mute"></i>
+            </div>
+        </section>
+
+        <!-- Autoplay + Muted + Loop -->
+        <section>
+            <video autoplay muted loop>
+                <source src="../asset/chime-bell.mp4" type="video/mp4">
+            </video>
+            <div class="options">
+                <div class="option">Autoplay</div>
+                <div class="option">Muted</div>
+                <div class="option">Loop</div>
+            </div>
+            <div class="video-controller">
+                <i class="fas fa-play-circle"></i>
+                <i class="fas fa-pause-circle"></i>
+                <i class="fas fa-redo-alt fa-sm"></i>
+                <div class="video-controller__progress">
+                    <div class="video-controller__progress-bar"></div>
+                </div>
+                <i class="fas fa-volume-up"></i>
+                <i class="fas fa-volume-mute"></i>
+            </div>
+        </section>
+    </main>
+    <script src="https://kit.fontawesome.com/2b64509284.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

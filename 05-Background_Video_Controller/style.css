@@ -1,0 +1,119 @@
+@import url(../reset.css);
+@import url(../functional.css);
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    position: relative;
+    width: 100%;
+    height: 33.3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+section video {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+section .option {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 15px;
+    color: #2d3436;
+    border-radius: 15px;
+    font-size: 2em;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+section .option::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: #fab1a0;
+}
+
+section .option::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 200%;
+    height: 300%;
+    background: #ff7675;
+    transform: rotateZ(25deg) translateX(-50%);
+    transition: 0.5s ease-in-out;
+}
+
+section .option:hover::after {
+    transform: rotateZ(25deg) translateX(50%);
+}
+
+section .option:not(:first-child) {
+    margin-top: 10px;
+}
+
+.video-controller {
+    position: relative;
+    margin-top: 50px;
+    margin-bottom: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(46, 46, 46);
+}
+
+.video-controller::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: rgb(216, 216, 216);
+    padding: 20px 20px;
+    filter: blur(5px);
+    border-radius: 25px;
+}
+
+.video-controller i {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.video-controller__progress {
+    position: relative;
+    width: 20vw;
+    height: 1em;
+    margin: 0 2px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: currentColor;
+    overflow: hidden;
+}
+
+.video-controller__progress-bar {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 50%;
+    background: rgb(85, 85, 85);
+    transition: 0.1s linear;
+}
