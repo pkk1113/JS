@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
+</head>
+
+<body>
+    <!-- 
+        viewBox="min-x min-y width height" : 그냥 OpenGL의 Viewport
+        preserveAspectRatio="align (meetOrSlice)": viewBox와 width/height가 다를 경우 적용하는 방법
+            [align]
+                "xMidYMid" (default) : 비율 유지, 가운데에 둡니다.
+                "none" : width/height에 맞춘다. (meetOrSlice)
+            [meetOrSlice]
+                "meet" (default) : viewBox가 잘리지 않도록 맞춥니다. (너비/높이에서 짧은 곳에 맞추어 비율 유지)
+                "slice" : viewBox가 잘리도록 맞춥니다. (너비/높이에서 긴 곳에 맞추어 비율 유지)
+    -->
+    <main class="main-container">
+        <article class="svg-card">
+            <p class="svg-card__title">circle</p>
+            <svg class="svg-card__icon icon1" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <circle cx="25" cy="25" r="20"></circle>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">rect</p>
+            <svg class="svg-card__icon icon2" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <rect x="5" y="5" width="40" height="40"></rect>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">rect + radius</p>
+            <svg class="svg-card__icon icon3" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <rect x="5" y="5" width="40" height="40" rx="10" ry="10"></rect>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">ellipse</p>
+            <svg class="svg-card__icon icon4" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <ellipse cx="25" cy="25" rx="22" ry="15"></ellipse>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">line</p>
+            <svg class="svg-card__icon icon5" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <line x1="5" y1="5" x2="45" y2="45" stroke-width="3"></line>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">polyline</p>
+            <svg class="svg-card__icon icon6" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <polyline points="24,8 13,43 43,22 7,20 37,43" stroke-width="3"></polyline>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">polygon</p>
+            <svg class="svg-card__icon icon7" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <polygon points="24,8 13,43 43,22 7,20 37,43" stroke-width="3"></polygon>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">polyline + fill</p>
+            <svg class="svg-card__icon icon8" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <!-- 시작점과 끝점이 연결되지 않습니다. -->
+                <polyline points="24,8 13,43 43,22 7,20 37,43" stroke-width="3"></polyline>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">polygon + fill</p>
+            <svg class="svg-card__icon icon9" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <!-- 시작점과 끝점이 연결됩니다. -->
+                <polygon points="24,8 13,43 43,22 7,20 37,43" stroke-width="3"></polygon>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">path(M, L)</p>
+            <svg class="svg-card__icon icon10" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
+                <!-- 
+                    1. 기본적으로 대문자는 절대좌표, 소문자는 상대좌표입니다.
+                    2. 커서 이동 Mx,y (시작점)
+                    3. 선 Lx,y / 수평선 Hx / 수직선 Hy (끝점)
+                    4. Cubic 베지어 곡선 Cx1,y1 x2,y2 x,y (제어점1, 제어점2, 끝점), 반복 Sx2,y2 x,y(제어점1, 끝점)
+                    - S를 통해 자동으로 앞의 곡선에의 끝점과 제어점2를 새로운 시작점, 제어점1(정확히는 반대방향의 위치)로 사용합니다.
+                    5. Quadratic 베지어 곡선 Qx1,y1 x,y (제어점1, 끝점)/ 반복 Tx,y(끝점)
+                    - T를 통해 자동으로 앞의 곡선에의 끝점과 제어점1를 새로운 시작점, 제어점1(정확히는 반대방향의 위치)로 사용합니다. 
+                    6. z 를 붙이면 시작점, 끝점을 연결합니다.
+                -->
+                <path d="M5,25 L20,40 L45,15" stroke-width="3"></path>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">path(M, C)</p>
+            <svg class="svg-card__icon icon11" viewBox="-450 -450 900 900" preserveAspectRatio="xMidYMid meet">
+                <path d="M1,324 C-493,80 -248,-468 0,-50 M1,324 C493,80 248,-468 0,-50" stroke-width="20"
+                      stroke-linecap="round" />
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">path(M, C, S)</p>
+            <svg class="svg-card__icon icon12" viewBox="0 0 190 160" preserveAspectRatio="xMidYMid meet">
+                <!-- C: 3차 베지어, S는 반복 -->
+                <path d="M10,80 C 40,10 65,10 95,80 S 150,150, 180,80" stroke-width="3" stroke-linecap="round" />
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">path(M, Q, T)</p>
+            <svg class="svg-card__icon icon13" viewBox="0 0 190 160" preserveAspectRatio="xMidYMid meet">
+                <!-- Q: 2차 베지어, T는 반복 -->
+                <path d="M10,80 Q 47.5,-10 95,80 T180,80" stroke-width="3" stroke-linecap="round" />
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">path(M, A)</p>
+            <svg class="svg-card__icon icon14" viewBox="-50 -50 100 100" preserveAspectRatio="xMidYMid meet">
+                <!-- rx,ry angle, large-arc, sweep -->
+                <!-- large-arc {1|0} 바깥쪽의 arc를 사용한다. -->
+                <!-- sweep {1|0} 윗쪽의 arc를 사용한다. -->
+                <path d="M-35,0 A40,20 10,0,0 35,0"></path>
+                <path d="M-35,0 A40,20 10,0,1 35,0"></path>
+                <path d="M-35,0 A40,20 10,1,0 35,0"></path>
+                <path d="M-35,0 A40,20 10,1,1 35,0"></path>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">&lt;g&gt; + &lt;use&gt;</p>
+            <svg class="svg-card__icon icon15" viewBox="-450 -450 900 900" preserveAspectRatio="xMidYMid meet">
+                <g id="icon15__heart">
+                    <path d="M1,324 C-493,80 -248,-468 0,-50 M1,324 C493,80 248,-468 0,-50" stroke-width="20"
+                          stroke-linecap="round" />
+                </g>
+                <use href="#icon15__heart" x="-300" y="-150" />
+                <use href="#icon15__heart" x="300" y="150" />
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">&lt;def&gt; + &lt;g&gt; + &lt;use&gt;</p>
+            <svg class="svg-card__icon icon16" viewBox="-450 -450 900 900" preserveAspectRatio="xMidYMid meet">
+                <def>
+                    <g id="icon16__heart">
+                        <path d="M1,324 C-493,80 -248,-468 0,-50 M1,324 C493,80 248,-468 0,-50" stroke-width="20"
+                              stroke-linecap="round" />
+                    </g>
+                </def>
+                <!-- svg는 마크업 순서에 의존하여 쌓입니다. z-index 없음 -->
+                <use href="#icon16__heart" x="-300" y="-150" />
+                <use href="#icon15__heart" x="0" y="0" />
+                <use href="#icon16__heart" x="300" y="150" />
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">xlink + text</p>
+            <svg class="svg-card__icon icon17" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                <a xlink:href="https://www.naver.com" xlink:title="NAVER" target="_blank">
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">NAVER</text>
+                </a>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">text + textPath</p>
+            <svg class="svg-card__icon icon18" viewBox="-50 -50 100 100" preserveAspectRatio="xMidYMid meet">
+                <!-- JS로 svg의 필터는 모두 unique id를 갖도록 해야할 것 같다. -->
+                <def>
+                    <path id="icon18__path1" d="M-35,0 A40,20 10,0,0 35,0"></path>
+                </def>
+                <text>
+                    <textPath id="text-path" href="#icon18__path1">
+                        현지인
+                    </textPath>
+                </text>
+                <script>
+                    {
+                        let path = document.querySelector('#icon18__path1');
+                        let textPath = document.querySelector('#text-path');
+                        textPath.setAttribute('textLength', path.getTotalLength());
+                    }
+                </script>
+            </svg>
+        </article>
+        <article class="svg-card">
+            <p class="svg-card__title">text + clip-path</p>
+            <svg class="svg-card__icon icon19" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                <clipPath id="icon19-clipPath1">
+                    <path d="M20,50 50,80 80,50 50,20 z"></path>
+                </clipPath>
+                <def>
+                    <g id="icon19-group1">
+                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">NAVER</text>
+                    </g>
+                </def>
+                <use href="#icon19-group1" x="0" y="0" clip-path="url(#icon19-clipPath1)"></use>
+                <use href="#icon19-group1" x="0" y="0" opacity="0.4"></use>
+            </svg>
+        </article>
+
+        <!-- svg Blur -->
+        <article class="svg-card">
+            <p class="svg-card__title">svg filter (gooey)</p>
+            <svg class="svg-card__icon invisible" viewBox="-50 -50 100 100" preserveAspectRatio="xMidYMid meet">
+                <def>
+                    <filter id="gooey">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                        <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                                       result="goo" />
+                        <feBlend in="SourceGraphic" in2="goo" />
+                    </filter>
+                </def>
+            </svg>
+            <div class="blocks gooey">
+                <div class="block color1">1</div>
+                <div class="block color1 animated">2</div>
+            </div>
+        </article>
+
+    </main>
+    </main>
+</body>
+
+</html>
