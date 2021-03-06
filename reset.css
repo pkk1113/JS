@@ -99,8 +99,10 @@ header,
 hgroup,
 menu,
 nav,
+main,
 section {
     display: block;
+    box-sizing: border-box;
 }
 
 body {
@@ -130,7 +132,10 @@ table {
     border-spacing: 0;
 }
 
-a {
+a,
+button,
+input {
     color: inherit;
+    outline: none;
     text-decoration: none;
 }
