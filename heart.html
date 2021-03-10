@@ -167,11 +167,6 @@
     <div id="js-reset">Reset</div>
   </main>
   <script>
-function playSound() {
-var sound = document.getElementById("audio");
-          sound.play();
-      }
-
 function initCard(article, name) {
   const userName = document.querySelector(`${article} .user-name`);
   const userScore = document.querySelector(`${article} .user-score`);
@@ -221,8 +216,13 @@ function initAudio() {
   const audio = document.querySelector('#js-audio');
   main.addEventListener('click', (e)=>{
     e.stopPropagation();
-    console.log('play');
-    audio.play();
+    if (audio.pause) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.play();
+    }
   });
 }
 function main() {
