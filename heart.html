@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>하트 계산기</title>
   <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <style>
@@ -21,7 +21,7 @@
     body {
       width: 100%;
       height: 100vh;
-      font-size: 2vmin;
+      font-size: 3vmin;
     }
     main {
       width: 100%;
@@ -30,23 +30,23 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 1em;
       background: #eeeeee;
     }
     .card {
       padding: 1em;
       display: flex;
-      gap: 1em;
       border-radius: 1em;
       background: #ffffee;
       box-shadow: 0 0 0.3em black;
+    }
+    .card:not(:first-child) {
+      margin-top: 2em;
     }
     .card .user {
       width: 30vw;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 0.5em;
       align-items: stretch;
       text-align: center;
     }
@@ -55,6 +55,7 @@
       text-align: left;
     }
     .card .user-score {
+      margin-top: 0.2em;
       padding: 0.1em 0.2em 0em 0.2em;
       border-radius: 15px;
       font-size: 3em;
@@ -62,9 +63,9 @@
       box-shadow: 0 0 0.1em black;
     }
     .card-btns {
+      margin-left: 5vw;
       width: 20vw;
       display: flex;
-      gap: 0.5em;
       flex-direction: column;
       justify-content: center;
       align-items: stretch;
@@ -79,6 +80,9 @@
       box-shadow: 0 0 0.3em black;
       cursor: pointer;
     }
+    .card-btn:last-child {
+      margin-top: 0.5em;
+    }
     .card-btn:hover {
       opacity: 0.8;
     }
@@ -88,9 +92,18 @@
     .card-btn.minus {
       background: var(--red);
     }
+    #js-reset {
+      padding: 0.5em 1em;
+      margin-top: 1em;
+      border-radius: 1em;
+      font-size: 2.5em;
+      background: pink;
+      box-shadow: 0 0 5px black;
+    }
   </style> 
 </head>
 <body>
+  <audio id="js-audio" src="http://www.soundjay.com/button/button-21.wav" autoplay="false" ></audio>
   <main>
     <article class="card">
       <div class="user">
@@ -151,8 +164,14 @@
         <div class="card-btn minus">-12</div>
       </div>        
     </article>
+    <div id="js-reset">Reset</div>
   </main>
   <script>
+function playSound() {
+var sound = document.getElementById("audio");
+          sound.play();
+      }
+
 function initCard(article, name) {
   const userName = document.querySelector(`${article} .user-name`);
   const userScore = document.querySelector(`${article} .user-score`);
@@ -188,11 +207,31 @@ function initCard(article, name) {
   });
 }
 
+function initResetBtn() {
+  const resetBtn = document.querySelector('#js-reset');
+  const scores = document.querySelectorAll('.user-score');
+  
+  resetBtn.addEventListener('click', ()=>{
+    scores.forEach(score=>{ score.textContent = 0; });  
+  });
+}
+
+function initAudio() {
+  const main = document.querySelector('main');
+  const audio = document.querySelector('#js-audio');
+  main.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    console.log('play');
+    audio.play();
+  });
+}
 function main() {
   initCard(".card:nth-of-type(1)");
   initCard(".card:nth-of-type(2)");
   initCard(".card:nth-of-type(3)");
   initCard(".card:nth-of-type(4)");
+  initResetBtn();
+  initAudio();
 }
  
 main(); 
