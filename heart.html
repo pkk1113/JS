@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>하트 계산기</title>
@@ -13,47 +14,67 @@
       --blue: #2196F3;
       --red: #f44336;
     }
+
     * {
       margin: 0;
       padding: 0;
-      font-family : 'Jua', sans-serif;
+      font-family: 'Jua', sans-serif;
     }
-    body {
-      width: 100%;
-      height: 100vh;
+
+    html {
       font-size: 3vmin;
     }
-    main {
+
+    @media screen and (min-width: 768px) {
+      html {
+        font-size: 16px;
+      }
+    }
+
+    body {
       width: 100%;
+      background: #eeeeee;
+      display: flex;
+      justify-content: center;
+    }
+
+    main {
+      margin: 2vh 0;
+      width: 95%;
+      max-width: 1000px;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      background: #eeeeee;
     }
+
     .card {
       padding: 1em;
       display: flex;
+      justify-content: space-around;
       border-radius: 1em;
       background: #ffffee;
       box-shadow: 0 0 0.3em black;
     }
+
     .card:not(:first-child) {
-      margin-top: 2em;
+      margin-top: 1em;
     }
+
     .card .user {
-      width: 30vw;
+      width: 30%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: stretch;
       text-align: center;
     }
+
     .card .user-name {
       font-size: 2em;
       text-align: left;
     }
+
     .card .user-score {
       margin-top: 0.2em;
       padding: 0.1em 0.2em 0em 0.2em;
@@ -61,16 +82,18 @@
       font-size: 3em;
       background: white;
       box-shadow: 0 0 0.1em black;
+      user-select: none;
     }
+
     .card-btns {
-      margin-left: 5vw;
-      width: 20vw;
+      width: 20%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: stretch;
       font-size: 1.5em;
     }
+
     .card-btn {
       padding: 0.5em;
       display: flex;
@@ -79,35 +102,50 @@
       border-radius: 0.5em;
       box-shadow: 0 0 0.3em black;
       cursor: pointer;
+      user-select: none;
     }
+
     .card-btn:last-child {
       margin-top: 0.5em;
     }
+
     .card-btn:hover {
       opacity: 0.8;
     }
+
     .card-btn.plus {
       background: var(--blue);
     }
+
     .card-btn.minus {
       background: var(--red);
     }
+
     #js-reset {
+      margin: 0 20%;
       padding: 0.5em 1em;
       margin-top: 1em;
       border-radius: 1em;
       font-size: 2.5em;
       background: pink;
       box-shadow: 0 0 5px black;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
     }
-  </style> 
+
+    #js-reset:hover {
+      opacity: 0.8;
+    }
+  </style>
 </head>
+
 <body>
-  <audio id="js-audio" src="http://www.soundjay.com/button/button-21.wav" autoplay="false" ></audio>
+  <audio id="js-audio" src="http://www.soundjay.com/button/button-21.wav" autoplay="false"></audio>
   <main>
     <article class="card">
       <div class="user">
-	<input class="user-name" placeholder="Name" />
+        <input class="user-name" placeholder="Name" />
         <p class="user-score">100</p>
       </div>
       <div class="card-btns h">
@@ -117,12 +155,12 @@
       <div class="card-btns q">
         <div class="card-btn plus">+12</div>
         <div class="card-btn minus">-12</div>
-      </div>        
+      </div>
     </article>
 
     <article class="card">
       <div class="user">
-	<input class="user-name" placeholder="Name" />
+        <input class="user-name" placeholder="Name" />
         <p class="user-score">100</p>
       </div>
       <div class="card-btns h">
@@ -132,12 +170,12 @@
       <div class="card-btns q">
         <div class="card-btn plus">+12</div>
         <div class="card-btn minus">-12</div>
-      </div>        
+      </div>
     </article>
 
     <article class="card">
       <div class="user">
-	<input class="user-name" placeholder="Name" />
+        <input class="user-name" placeholder="Name" />
         <p class="user-score">100</p>
       </div>
       <div class="card-btns h">
@@ -147,12 +185,12 @@
       <div class="card-btns q">
         <div class="card-btn plus">+12</div>
         <div class="card-btn minus">-12</div>
-      </div>        
+      </div>
     </article>
 
     <article class="card">
       <div class="user">
-	<input class="user-name" placeholder="Name" />
+        <input class="user-name" placeholder="Name" />
         <p class="user-score">100</p>
       </div>
       <div class="card-btns h">
@@ -162,79 +200,89 @@
       <div class="card-btns q">
         <div class="card-btn plus">+12</div>
         <div class="card-btn minus">-12</div>
-      </div>        
+      </div>
     </article>
     <div id="js-reset">Reset</div>
   </main>
   <script>
-function initCard(article, name) {
-  const userName = document.querySelector(`${article} .user-name`);
-  const userScore = document.querySelector(`${article} .user-score`);
-  const hPlus = document.querySelector(`${article} .card-btns.h .card-btn.plus`);
-  const hMinus = document.querySelector(`${article} .card-btns.h .card-btn.minus`);
-  const qPlus = document.querySelector(`${article} .card-btns.q .card-btn.plus`);
-  const qMinus = document.querySelector(`${article} .card-btns.q .card-btn.minus`);
+    function initCard(article, name) {
+      const userName = document.querySelector(`${article} .user-name`);
+      const userScore = document.querySelector(`${article} .user-score`);
+      const hPlus = document.querySelector(`${article} .card-btns.h .card-btn.plus`);
+      const hMinus = document.querySelector(`${article} .card-btns.h .card-btn.minus`);
+      const qPlus = document.querySelector(`${article} .card-btns.q .card-btn.plus`);
+      const qMinus = document.querySelector(`${article} .card-btns.q .card-btn.minus`);
 
-  userName.textContent = name;
-  userScore.textContent = 0;
+      userName.textContent = name;
+      userScore.textContent = 0;
 
-  hPlus.addEventListener('click', ()=>{
-    let score = parseInt(userScore.textContent);
-    score += 1;
-    userScore.textContent = `${score}`;
-  });
-  hMinus.addEventListener('click', ()=>{
-    let score = parseInt(userScore.textContent);
-    score -= 1;
-    if (score < 0) score = 0;
-    userScore.textContent = `${score}`;
-  });
-  qPlus.addEventListener('click', ()=>{
-    let score = parseInt(userScore.textContent);
-    score += 12;
-    userScore.textContent = `${score}`;
-  });
-  qMinus.addEventListener('click', ()=>{
-    let score = parseInt(userScore.textContent);
-    score -= 12;
-    if (score < 0) score = 0;
-    userScore.textContent = `${score}`;
-  });
-}
-
-function initResetBtn() {
-  const resetBtn = document.querySelector('#js-reset');
-  const scores = document.querySelectorAll('.user-score');
-  
-  resetBtn.addEventListener('click', ()=>{
-    scores.forEach(score=>{ score.textContent = 0; });  
-  });
-}
-
-function initAudio() {
-  const main = document.querySelector('main');
-  const audio = document.querySelector('#js-audio');
-  main.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    if (audio.pause) {
-      audio.play();
-    } else {
-      audio.pause();
-      audio.currentTime = 0;
-      audio.play();
+      hPlus.addEventListener('click', () => {
+        let score = parseInt(userScore.textContent);
+        score += 1;
+        userScore.textContent = `${score}`;
+      });
+      hMinus.addEventListener('click', () => {
+        let score = parseInt(userScore.textContent);
+        score -= 1;
+        if (score < 0) score = 0;
+        userScore.textContent = `${score}`;
+      });
+      qPlus.addEventListener('click', () => {
+        let score = parseInt(userScore.textContent);
+        score += 12;
+        userScore.textContent = `${score}`;
+      });
+      qMinus.addEventListener('click', () => {
+        let score = parseInt(userScore.textContent);
+        score -= 12;
+        if (score < 0) score = 0;
+        userScore.textContent = `${score}`;
+      });
     }
-  });
-}
-function main() {
-  initCard(".card:nth-of-type(1)");
-  initCard(".card:nth-of-type(2)");
-  initCard(".card:nth-of-type(3)");
-  initCard(".card:nth-of-type(4)");
-  initResetBtn();
-  initAudio();
-}
- 
-main(); 
+
+    function initResetBtn() {
+      const resetBtn = document.querySelector('#js-reset');
+      const scores = document.querySelectorAll('.user-score');
+
+      resetBtn.addEventListener('click', () => {
+        scores.forEach(score => {
+          score.textContent = 0;
+        });
+      });
+    }
+
+    function initAudio() {
+      const buttones = document.querySelectorAll('.card-btn');
+      const resetBtn = document.querySelector('#js-reset');
+
+      const audio = document.querySelector('#js-audio');
+
+      buttones.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          audio.currentTime = 0;
+          audio.play();
+        });
+      });
+
+      resetBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        audio.currentTime = 0;
+        audio.play();
+      });
+    }
+
+    function main() {
+      initCard(".card:nth-of-type(1)");
+      initCard(".card:nth-of-type(2)");
+      initCard(".card:nth-of-type(3)");
+      initCard(".card:nth-of-type(4)");
+      initResetBtn();
+      initAudio();
+    }
+
+    main();
   </script>
 </body>
+
 </html>
