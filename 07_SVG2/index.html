@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500"
+         viewBox="0 0 500 500">
+        <defs>
+            <path id="path" d="M10,10 250,490 490,10"></path>
+            <circle id="circle" cx="0" cy="0" r="10" fill="red" stroke="none"></circle>
+        </defs>
+        <use href="#circle"/>
+        <use href="#path" stroke-width="5" fill="none" stroke-linecap="round" />
+        <text>
+            <textPath id="text-path" href="#path">
+            </textPath>
+        </text>
+    </svg>
+
+    <input type="range" name="weight" id="range_weight" value="0" min="0" max="100" oninput="range_weight_disp.value = range_weight.value; moveObj(range_weight.value);">
+    <output  id="range_weight_disp"></output>
+ 
+    <script>
+        function moveObj(prcnt) {
+            const circle = document.querySelector('#circle');
+            const path = document.querySelector('#path');
+            const pathLength = Math.floor(path.getTotalLength());
+
+            prcnt = (prcnt * pathLength) / 100;
+
+            // 여기서 %에 맞는 위치를 얻는다.
+            pt = path.getPointAtLength(prcnt);
+            pt.x = Math.round(pt.x);
+            pt.y = Math.round(pt.y);
+
+            // 이동, 필요하면 scale, rotate를 translate 뒤에 추가
+            circle.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+        }
+
+        moveObj(0);
+    </script>
+</body>
+
+</html>
