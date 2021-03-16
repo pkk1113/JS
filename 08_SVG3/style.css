@@ -21,3 +21,12 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.art {
+    width: 800px;
+    background: hotpink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}

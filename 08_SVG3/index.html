@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="art">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -4 38 20">
+            <path id="js-path" fill="none" stroke-linecap="round"
+                  d="M 2 5 L 6 5 C 7 -1 7 2 8 5 S 9 11 10 5 L 18.955 4.995 Q 19.186 5 20 6 L 27 14 L 35 5 C 39 -1 30 -6 27 2 C 24 -6 14 -1 19 5">
+            </path>
+            <circle id="js-circle" cx="0" cy="0" r="1.5" fill="black" stroke="none"></circle>
+            <circle id="js-circle2" cx="0" cy="0" r="0.5" fill="hotpink" stroke="none"></circle>
+        </svg>
+    </div>
+
+    <button id="js-replay" disabled>Replay</button>
+
+    <script>
+        const circle = document.querySelector('#js-circle');
+        const circle2 = document.querySelector('#js-circle2');
+        const path = document.querySelector('#js-path');
+        const replayBtn = document.querySelector('#js-replay');
+
+        function startFollowingPathAnimation(obj, path, delay, duration) {
+            const pathLength = path.getTotalLength() * 0.95;
+            const stepLength = delay * pathLength / duration;
+            let currentPathLength = 0;
+
+            path.style['stroke-dasharray'] = `${pathLength} ${2 * pathLength}`;
+
+            // start Interval
+            const intervalId = window.setInterval(() => {
+                currentPathLength += stepLength;
+                const pt = path.getPointAtLength(currentPathLength);
+                obj.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+                path.style['stroke-dashoffset'] = pathLength - currentPathLength;
+            }, delay);
+
+            setTimeout(() => {
+                replayBtn.disabled = false;
+                clearInterval(intervalId);
+            }, duration);
+        }
+
+        replayBtn.addEventListener('click', () => {
+            replayBtn.disabled = true;
+            startFollowingPathAnimation(circle, path, 10, 3000);
+            startFollowingPathAnimation(circle2, path, 10, 3000);
+        })
+
+        startFollowingPathAnimation(circle, path, 10, 3000);
+        startFollowingPathAnimation(circle2, path, 10, 3000);
+    </script>
+</body>
+
+</html>
