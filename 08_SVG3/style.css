@@ -20,13 +20,46 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: #121212;
 }
 
 .art {
     width: 800px;
-    background: hotpink;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    color: hotpink;
+    opacity: 0;
+    animation: 
+        show 0.5s ease-in-out forwards,
+        beat 0.5s linear infinite;
+}
+
+@keyframes show {
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes beat {
+    70% {
+        transform: scale(1.01, 1.01);
+    }
+}
+
+
+#js-replay {
+    width: 200px;
+    height: 100px;
+    border-radius: 20px;
+    border: none;
+    font-size: 30px;
+    box-shadow:
+        0 0 10px white,
+        0 0 20px white;
+}
+
+#js-replay:disabled {
+    box-shadow: 0 0 10px black;
 }

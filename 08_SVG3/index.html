@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Small Ball Story</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,16 +15,14 @@
             <path id="js-path" fill="none" stroke-linecap="round"
                   d="M 2 5 L 6 5 C 7 -1 7 2 8 5 S 9 11 10 5 L 18.955 4.995 Q 19.186 5 20 6 L 27 14 L 35 5 C 39 -1 30 -6 27 2 C 24 -6 14 -1 19 5">
             </path>
-            <circle id="js-circle" cx="0" cy="0" r="1.5" fill="black" stroke="none"></circle>
-            <circle id="js-circle2" cx="0" cy="0" r="0.5" fill="hotpink" stroke="none"></circle>
+            <circle id="js-circle" cx="0" cy="0" r="0.4" fill="black" stroke="none"></circle>
         </svg>
     </div>
 
-    <button id="js-replay" disabled>Replay</button>
+    <button id="js-replay" disabled>Played</button>
 
     <script>
         const circle = document.querySelector('#js-circle');
-        const circle2 = document.querySelector('#js-circle2');
         const path = document.querySelector('#js-path');
         const replayBtn = document.querySelector('#js-replay');
 
@@ -45,18 +43,18 @@
 
             setTimeout(() => {
                 replayBtn.disabled = false;
+                replayBtn.textContent = 'Replay';
                 clearInterval(intervalId);
             }, duration);
         }
 
         replayBtn.addEventListener('click', () => {
             replayBtn.disabled = true;
+            replayBtn.textContent = 'Played';
             startFollowingPathAnimation(circle, path, 10, 3000);
-            startFollowingPathAnimation(circle2, path, 10, 3000);
         })
 
         startFollowingPathAnimation(circle, path, 10, 3000);
-        startFollowingPathAnimation(circle2, path, 10, 3000);
     </script>
 </body>
 
